@@ -1,16 +1,18 @@
 body {
+    background-color: cadetblue;
     font-family: Arial, sans-serif;
     padding: 20px;
 }
 
 .customer-list {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 5px;
     margin: 10px 0;
 }
 
 h3 {
     margin: 0 0 10px 0;
+
 }
 
 ul {
@@ -27,7 +29,9 @@ li {
 }
 
 li:hover {
-    background-color: #eaeaea;
+    background-color: #c2c2c2;
+    transition: 0.8s;
+    scale: 1.05;
 }
 
 nav {
@@ -57,4 +61,50 @@ nav a.active {
     content: "";
     clear: both;
     display: table;
+}
+
+div h1 {
+    text-align: center;
+}
+
+.app-container {
+    text-align: center;
+    background-color: #333;
+    border-radius: 8px;
+    color: darkblue;
+    text-shadow: 1px 1px 2px rgb(148, 148, 148);
+}
+
+input {
+    border-radius: 7px;
+    border: none;
+    margin: 3px;
+}
+
+input:hover {
+    cursor: pointer;
+    background-color: rgb(255, 158, 158);
+    transition: 0.5s ease-out;
+}
+
+button {
+    margin: 3px;
+    border-radius: 1px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    
+}
+
+button:hover {
+    cursor:pointer;
+    scale: 1.1;
+    background-color: grey;
+    color: #ff0000;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+label {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: larger;
 }

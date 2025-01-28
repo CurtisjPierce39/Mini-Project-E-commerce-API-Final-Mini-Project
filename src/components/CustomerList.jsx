@@ -49,7 +49,7 @@ class CustomerList extends Component {
                 <ul>
                     {customers.map(customer => (
                         <li key={customer.id} onClick={() => this.selectCustomer(customer.id)}>
-                            {customer.name}<br></br>{customer.email}<br></br>{customer.phone}
+                            {customer.name}<br></br>{customer.email}<br></br>{customer.phone}<br></br>
                             <button onClick={() => this.deleteCustomer(customer.id)}>Delete</button>
                         </li>
                     ))}
