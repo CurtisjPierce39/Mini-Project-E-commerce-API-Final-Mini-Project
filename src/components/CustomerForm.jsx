@@ -1,5 +1,6 @@
 import { Component } from "react";
 import axios from "axios";
+import { func, number } from "prop-types";
 
 // Controlled Components
 // When React (via state) controls the value of an input for example
@@ -12,14 +13,43 @@ class CustomerForm extends Component {
             name: '',
             email: '',
             phone: '',
-            errors: {}
+            errors: {},
+            selectedCustomerId: null
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.customerId !== this.props.customerId) {
+            this.setState({ selectedCustomerId: this.props.customerId });
+
+            if (this.props.customerId) {
+                axios.get(`http://127.0.0.1:5000/customers/${this.props.customerId}`)
+                    .then(response => {
+                        const customerData = response.data;
+                        this.setState({
+                            name: customerData.name,
+                            email: customerData.email,
+                            phone: customerData.phone
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching customer data:', error);
+                        //Handle errors here
+                    });
+            } else {
+                this.setState({
+                    name: '',
+                    email: '',
+                    phone: ''
+                });
+            }
         }
     }
 
     handleChange = (event) => {
         const { name, value } = event.target;
         this.setState({ [name]: value});
-        console.log(name,value)
+        // console.log(name,value)
     }
 
     validateForm = () => {
@@ -42,16 +72,27 @@ class CustomerForm extends Component {
                 email: this.state.email.trim(),
                 phone: this.state.phone.trim(),
             };
-            axios.post('http://127.0.0.1:5000/customers', customerData)
-                .then(response => {
-                    console.log('Data successfully submitted:', response.data);
-                    // Handle the successful submission here
-                    // e.g., clearing the form, showing a success message, etc.
+            const apiUrl = this.state.selectedCustomerId
+                ? `http://127.0.0.1:5000/customers/${this.state.selectedCustomerId}`
+                : 'http://127.0.0.1:5000/customers';
+
+            const httpMethod = this.state.selectedCustomerId ? axios.put : axios.post;
+
+            httpMethod(apiUrl, customerData)
+                .then(() => {
+                    this.props.onUpdateCustomerList();
+
+                    this.setState({
+                        name: '',
+                        email: '',
+                        phone: '',
+                        errors: {},
+                        selectedCustomerId: null
+                    });
                 })
                 .catch(error => {
-                    console.error('There was an error submitting the form:', error);
+                    console.error('Error submitting form:', error);
                 });
-
         } else {
             this.setState({ errors });
         }
@@ -87,6 +128,11 @@ class CustomerForm extends Component {
             </form>
         );
     }
+}
+
+CustomerForm.propTypes = {
+    customerId: number,
+    onUpdateCustomerList: func
 }
 
 export default CustomerForm;
