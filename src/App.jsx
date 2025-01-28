@@ -37,8 +37,8 @@ class App extends Component {
       <div className='app-container'>
         <h1>Our Customers</h1>
         <CustomerForm customerId={selectedCustomerId} onUpdateCustomerList={this.updateCustomerList} />
-        {/* <ProductForm /> */}
         <CustomerList ref={ref => this.customerListRef = ref} onCustomerSelect={this.handleCustomerSelect} />
+        {/* <ProductForm /> */}
         {/* {selectedCustomerId && (
           <OrderList
               customerId={selectedCustomerId}

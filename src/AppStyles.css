@@ -79,6 +79,7 @@ input {
     border-radius: 7px;
     border: none;
     margin: 3px;
+    padding: 8px;
 }
 
 input:hover {
