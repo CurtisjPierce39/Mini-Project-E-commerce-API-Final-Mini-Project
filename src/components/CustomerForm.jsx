@@ -112,8 +112,6 @@ class CustomerForm extends Component {
                         isLoading: false,
                         showSuccessModal: true
                     });
-                    // this.props.navigate('/customers')
-                    // this.setState({ isLoading: false})
                 })
                 .catch(error => {
                     console.error('Error submitting form:', error);

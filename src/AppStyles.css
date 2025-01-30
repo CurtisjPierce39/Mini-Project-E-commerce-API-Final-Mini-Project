@@ -72,9 +72,10 @@ div h1 {
 }
 
 .app-container {
+    border: solid black;
     text-align: center;
     background-color: #a3a3a3;
-    border-radius: px;
+    border-radius: 12px;
     color: darkblue;
     text-shadow: 1px 1px 2px rgb(37, 37, 37);
 }

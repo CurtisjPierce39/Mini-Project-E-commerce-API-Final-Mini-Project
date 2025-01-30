@@ -69,6 +69,7 @@ const ProductForm = () => {
     return (
         <>
             <Form onSubmit={handleSubmit}>
+                <h2>Product Management</h2>
                 <h3>{id ? 'Edit' : 'Add'} Product</h3>
                 {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
                 <Form.Group controlId="productName">

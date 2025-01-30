@@ -8,6 +8,7 @@ const ProductList = () => {
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
 
+
     const fetchProducts = async () => {
         try {
             const response = await axios.get('http://127.0.0.1:5000/products');
@@ -34,7 +35,7 @@ const ProductList = () => {
         <Container>
             <Row>
                 <Col>
-                    <h3>Products</h3>
+                    <h2>Products</h2>
                     <ListGroup>
                         {products.map(product => {
                             <ListGroup.Item key={product.id} className="d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 bg-white rounded">
