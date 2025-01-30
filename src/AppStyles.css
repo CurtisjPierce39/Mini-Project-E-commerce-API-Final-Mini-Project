@@ -36,6 +36,7 @@ li:hover {
 
 nav {
     background-color: #333;
+    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -46,11 +47,14 @@ nav a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    border-radius: 8px;
+    transition: 0.5s;
 }
 
 nav a:hover {
     background-color: #ddd;
     color: black;
+    scale: .9;
 }
 
 nav a.active {
@@ -69,16 +73,16 @@ div h1 {
 
 .app-container {
     text-align: center;
-    background-color: #333;
-    border-radius: 8px;
+    background-color: #a3a3a3;
+    border-radius: px;
     color: darkblue;
-    text-shadow: 1px 1px 2px rgb(148, 148, 148);
+    text-shadow: 1px 1px 2px rgb(37, 37, 37);
 }
 
 input {
     border-radius: 7px;
     border: none;
-    margin: 3px;
+    margin: 5px;
     padding: 8px;
 }
 
@@ -89,16 +93,14 @@ input:hover {
 }
 
 button {
-    margin: 3px;
+    margin: 15px;
     border-radius: 1px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 15px;
-    
+    font-size: 20px;
 }
 
 button:hover {
     cursor:pointer;
-    scale: 1.1;
     background-color: grey;
     color: #ff0000;
     transition: 0.3s;
@@ -108,4 +110,17 @@ button:hover {
 label {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: larger;
+}
+
+div img {
+    display: flexbox;
+    border: solid white;
+    border-radius: 9px;
+    max-width: 500px;
+    margin: 30px;
+    box-shadow: 0px 0px 30px #000dff;
+}
+.img-fluid {
+    max-width: 50%;
+    height: auto;
 }

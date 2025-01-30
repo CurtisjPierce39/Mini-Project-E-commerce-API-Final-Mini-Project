@@ -1,56 +1,32 @@
-import { Component } from 'react';
+// import { Component } from 'react';
+import NavigationBar from './components/NavigationBar';
 import CustomerList from './components/CustomerList';
 // import OrderList from './components/OrderList';
-// import ProductList from './components/ProductList';
-import CustomerForm from './components/CustomerForm'
-// import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import ProductList from './components/ProductList';
+import CustomerFormWrapper from './components/CustomerFormWrapper';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import './AppStyles.css';
-// import ProductForm from './components/ProductForm';
+import ProductForm from './components/ProductForm';
+import NotFound from './components/NotFound';
+import HomePage from './components/HomePage';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedCustomerId: null,
-      // selectedOrderId: null
-    };
-  }
-
-  handleCustomerSelect = (customerId) => {
-    this.setState({ selectedCustomerId: customerId });
-  }
-
-  updateCustomerList = () => {
-    this.customerListRef.fetchCustomers();
-  };
-
-
-  // handleOrderSelect = (orderId) => {
-  //   this.setState({ selectedOrderId: orderId })
-  // }
-
-
-  render() {
-    const { selectedCustomerId } = this.state
-
+function App() {
     return (
       <div className='app-container'>
-        <h1>Our Customers</h1>
-        <CustomerForm customerId={selectedCustomerId} onUpdateCustomerList={this.updateCustomerList} />
-        <CustomerList ref={ref => this.customerListRef = ref} onCustomerSelect={this.handleCustomerSelect} />
-        {/* <ProductForm /> */}
-        {/* {selectedCustomerId && (
-          <OrderList
-              customerId={selectedCustomerId}
-              onOrderSelect={this.handleOrderSelect}
-          />
-        )}
-        {selectedOrderId && (
-          <ProductList orderId={selectedOrderId} />
-        )} */}
+          <NavigationBar/>
+          <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/add-customer/" element={<CustomerFormWrapper />} />
+              <Route path="/edit-customer/:id" element={<CustomerFormWrapper />} />
+              <Route path="/customers" element={<CustomerList />} />
+              <Route path="/add-product" element={<ProductForm />} />
+              <Route path='edit-product/:id' element={<ProductForm />} />
+              <Route path='/products' element={<ProductList />} />
+              <Route path='*' element={<NotFound />} />
+            </Routes>
       </div>
     );
   }
-}
+
 
 export default App;
