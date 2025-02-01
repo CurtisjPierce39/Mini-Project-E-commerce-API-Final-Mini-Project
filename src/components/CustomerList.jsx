@@ -2,8 +2,7 @@ import { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { func } from "prop-types";
-import { Form, Button, Alert, Container, ListGroup } from "react-bootstrap";
-
+import { Button, Alert, Container, ListGroup } from "react-bootstrap";
 
 class CustomerList extends Component {
     constructor(props) {
@@ -52,11 +51,11 @@ class CustomerList extends Component {
         return (
             <Container>
                 {error && <Alert variant='danger'>{error}</Alert>}
-                <h3 className='mt-3 mb-3 text-center'>Customers</h3>
+                <h2 className='mt-3 mb-3 text-center'>Customers</h2>
                 <ListGroup>
                     {customers.map(customer => (
                         <ListGroup.Item key={customer.id} className='d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 bg-white rounded'>
-                            <Link to={`/edit-customer/${customer.id}`} className='text-primary'>{customer.name}</Link>
+                            <Link to={`/edit-customer/${customer.id}`} className='text-primary'>{customer.id}<br></br>{customer.name}<br></br>{customer.email}<br></br>{customer.phone}<br></br></Link>
                             <Button variant='danger' size='sm' onClick={() => this.deleteCustomer(customer.id)}>Delete</Button>
                         </ListGroup.Item>
                     ))}

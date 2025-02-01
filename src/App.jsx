@@ -1,7 +1,7 @@
 // import { Component } from 'react';
 import NavigationBar from './components/NavigationBar';
 import CustomerList from './components/CustomerList';
-// import OrderList from './components/OrderList';
+import OrderList from './components/OrderList';
 import ProductList from './components/ProductList';
 import CustomerFormWrapper from './components/CustomerFormWrapper';
 import { Route, Routes } from 'react-router-dom';
@@ -9,10 +9,9 @@ import './AppStyles.css';
 import ProductForm from './components/ProductForm';
 import NotFound from './components/NotFound';
 import HomePage from './components/HomePage';
+import OrderForm from './components/OrderForm';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
-
 
 function App() {
 
@@ -45,6 +44,18 @@ function App() {
   const handleProductDeleted = () => {
     fetchProducts();
   };
+  const handleEditOrder = (order) => {
+    setSelectedOrder(order)
+  };
+  
+  const handleOrderUpdated = () => {
+    fetchOrders();
+    setSelectedOrder(null);
+  };
+
+  const handleOrderDeleted = () => {
+    fetchOrders();
+  };
 
   return (
     <div className='app-container'>
@@ -54,6 +65,8 @@ function App() {
         <Route path="/add-customer/" element={<CustomerFormWrapper />} />
         <Route path="/edit-customer/:id" element={<CustomerFormWrapper />} />
         <Route path="/customers" element={<CustomerList />} />
+        <Route path="/orders" element={<OrderList />} />
+        <Route path="/add-order" element={<OrderForm />} />
         <Route path="/add-product" element={<ProductForm selectedProduct={selectedProduct} onProductUpdated={handleProductUpdated}/>} />
         <Route path='edit-product/:id' element={<ProductForm />} />
         <Route path='/products' element={<ProductList products={products} onEditProduct={handleEditProduct} onProductDeleted={handleProductDeleted}/>} />
