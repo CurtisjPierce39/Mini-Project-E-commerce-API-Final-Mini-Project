@@ -61,9 +61,10 @@ class OrderList extends Component {
                         <ListGroup.Item key={order.id} className='d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 bg-white rounded'>
                             <Link to={`/edit-order/${order.id}`} className='text-primary'>{order.date}<br></br>{order.customer_id}<br></br>{order.product_id}</Link>
                             <Button variant='danger' size='sm' onClick={() => this.deleteOrder(order.id)}>Delete</Button>
-                            {/* <Button variant="primary" onClick={() => navigate(`/edit-product/${product.id}`)} className="me-2">Edit</Button> */}
                         </ListGroup.Item>
                     ))}
+
+                    
                 </ListGroup>
             </Container>
         );
