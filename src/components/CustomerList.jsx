@@ -55,7 +55,7 @@ class CustomerList extends Component {
                 <ListGroup>
                     {customers.map(customer => (
                         <ListGroup.Item key={customer.id} className='d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 bg-white rounded'>
-                            <Link to={`/edit-customer/${customer.id}`} className='text-primary'>{customer.id}<br></br>{customer.name}<br></br>{customer.email}<br></br>{customer.phone}<br></br></Link>
+                            <Link to={`/edit-customer/${customer.id}`} className='text-primary'>(ID:{customer.id})<br></br>{customer.name}<br></br>{customer.email}<br></br>{customer.phone}<br></br></Link>
                             <Button variant='danger' size='sm' onClick={() => this.deleteCustomer(customer.id)}>Delete</Button>
                         </ListGroup.Item>
                     ))}

@@ -2,7 +2,7 @@ import { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { func } from "prop-types";
-import { Button, Alert, Container, ListGroup } from "react-bootstrap";
+import { Button, Alert, Container, ListGroup, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 
@@ -54,17 +54,20 @@ class ProductList extends Component {
 
         return (
             <Container>
+                <Row>
+                    <Col>
                 {error && <Alert variant='danger'>{error}</Alert>}
                 <h2 className='mt-3 mb-3 text-center'>Products</h2>
                 <ListGroup>
                     {products.map(product => (
                         <ListGroup.Item key={product.id} className='d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 bg-white rounded'>
-                            <Link to={`/edit-customer/${product.id}`} className='text-primary'><br></br>{product.name}<br></br>{product.price}<br></br></Link>
+                            <Link to={`/edit-product/${product.id}`} className='text-primary'>{product.id}<br></br>{product.name}<br></br>{product.price}<br></br></Link>
                             <Button variant='danger' size='sm' onClick={() => this.deleteProduct(product.id)}>Delete</Button>
-                            <Button variant="primary" onClick={() => navigate(`/edit-product/${product.id}`)} className="me-2">Edit</Button>
                         </ListGroup.Item>
                     ))}
                 </ListGroup>
+                </Col>
+                </Row>
             </Container>
         );
     }

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { object, func } from "prop-types";
-import { Form, Button, Alert, Modal, Spinner } from "react-bootstrap";
+import { Form, Button, Alert, Modal, Spinner, Row, Col } from "react-bootstrap";
 import axios from "axios";
 
 const OrderForm = () => {
-    const [order, setOrder] = useState({ name: '', products: '', price: '' });
+    const [customerName, setCustomerName] = useState('')
+    const [orderItems, setOrderItems] = useState({ name: '', quantity: 1 });
+    const [products, setProducts] = useState([{ name: '', quantity: 1 }]);
     const [errors, setErrors] = useState('');
     const [isSubmitting, setSubmitting] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -27,7 +29,7 @@ const OrderForm = () => {
         let errors = {};
         if (!order.name) errors.name = 'Customer name is required';
         if (!order.products) errors.product = 'Product name is required';
-        if (!order.price || order.price <= 0) errors.price = 'Price must be a positive number';
+        if (!order.quantity || order.quantity <= 0) errors.quantity = 'Quantity must be a positive number';
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };
@@ -48,19 +50,34 @@ const OrderForm = () => {
         } finally {
             setSubmitting(false);
         }
+        console.log('Order submitted:', { customerName, products });
     };
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setOrder(prevOrder => ({
-            ...prevOrder,
-            [name]: value
-        }));
+    const handleCustomerNameChange = (event) => {
+        setCustomerName(event.target.value);
     };
+
+    const addProduct = () => {
+        setProducts([...products, { name: '', quantity: 1 }]);
+    };
+
+    const handleProductChange = (index, field, value) => {
+        const updatedProducts = [...products];
+        updatedProducts[index][field] = value;
+        setProducts(updatedProducts);
+    };
+
+    // const handleChange = (event) => {
+    //     const { name, value } = event.target;
+    //     setOrder(prevOrder => ({
+    //         ...prevOrder,
+    //         [name]: value
+    //     }));
+    // };
 
     const handleClose = () => {
         setShowSuccessModal(false);
-        setOrder({ name: '', product: '', price: '' });
+        setOrder({ name: '', product: '' });
         setSubmitting(false);
         navigate('/orders');
     };
@@ -69,6 +86,7 @@ const OrderForm = () => {
 
     return (
         <>
+
             <Form onSubmit={handleSubmit}>
                 <h2>Order Management</h2>
                 <h3>{id ? 'Edit' : 'Add'} Order</h3>
@@ -77,9 +95,9 @@ const OrderForm = () => {
                     <Form.Label>Name:</Form.Label>
                     <Form.Control
                         type="text"
-                        name="name"
-                        value={order.name}
-                        onChange={handleChange}
+                        name="customerName"
+                        value={customerName}
+                        onChange={handleCustomerNameChange}
                         isInvalid={!!errors.name}
                     />
                     <Form.Control.Feedback type="invalid">
@@ -87,34 +105,34 @@ const OrderForm = () => {
                     </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group controlId="orderProducts">
-                    <Form.Label>Products:</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="products"
-                        value={order.products}
-                        onChange={handleChange}
-                        isInvalid={!!errors.products}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.products}
-                    </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group controlId="productPrice">
-                    <Form.Label>Price:</Form.Label>
-                    <Form.Control
-                        type="number"
-                        name="price"
-                        value={order.price}
-                        onChange={handleChange}
-                        isInvalid={!!errors.price}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.price}
-                    </Form.Control.Feedback>
-                </Form.Group>
-
+                {products.map((product, index) => (
+                    <Row key={index}>
+                        <Col>
+                            <Form.Group controlId={`productName-${index}`}>
+                                <Form.Label>Product Name</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={product.name}
+                                    onChange={(e) => handleProductChange(index, 'name', e.target.value)}
+                                    required
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group controlId={`productQuantity-${index}`}>
+                                <Form.Label>Quantity</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    min="1"
+                                    value={product.quantity}
+                                    onChange={(e) => handleProductChange(index, 'quantity', parseInt(e.target.value, 10) || 1)}
+                                    required
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                ))}
+                <Button onClick={addProduct}>Add Product</Button>
                 <Button variant="primary" type="submit" disabled={isSubmitting}>
                     {isSubmitting ? <Spinner as="span" animation="border" size="sm" /> : 'Submit'}
                 </Button>

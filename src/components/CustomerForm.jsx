@@ -144,7 +144,7 @@ class CustomerForm extends Component {
 
                 <Form onSubmit={this.handleSubmit} >
                 <h2>Customer Management</h2>
-                <h3>{id ? 'Edit' : 'Add'} Customer</h3>
+                <h3>{ this.props.params.id ? 'Edit' : 'Add'} Customer</h3>
                     <Form.Group controlId="formGroupName">
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" name="name" value={name} onChange={this.handleChange} />
