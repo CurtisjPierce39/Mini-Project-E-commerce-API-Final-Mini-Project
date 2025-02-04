@@ -16,7 +16,10 @@ function NavigationBar() {
                     </Nav.Link>                    
                     <Nav.Link as={NavLink} to="/customers" activeclassname="active">
                     Customers
-                    </Nav.Link>                    
+                    </Nav.Link>                 
+                    <Nav.Link as={NavLink} to="/customer-account" activeclassname="active">
+                    Customer Accounts
+                    </Nav.Link>    
                     <Nav.Link as={NavLink} to="/add-product" activeclassname="active">
                     Add Product
                     </Nav.Link>

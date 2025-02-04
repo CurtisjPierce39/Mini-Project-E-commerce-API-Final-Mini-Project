@@ -6,7 +6,7 @@ import axios from "axios";
 
 const OrderForm = () => {
     const [customerName, setCustomerName] = useState('')
-    const [orderItems, setOrderItems] = useState({ name: '', quantity: 1 });
+    const [order, setOrder] = useState({ name: '', quantity: 1 });
     const [products, setProducts] = useState([{ name: '', quantity: 1 }]);
     const [errors, setErrors] = useState('');
     const [isSubmitting, setSubmitting] = useState(false);
@@ -67,13 +67,13 @@ const OrderForm = () => {
         setProducts(updatedProducts);
     };
 
-    // const handleChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setOrder(prevOrder => ({
-    //         ...prevOrder,
-    //         [name]: value
-    //     }));
-    // };
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setOrder(prevOrder => ({
+            ...prevOrder,
+            [name]: value
+        }));
+    };
 
     const handleClose = () => {
         setShowSuccessModal(false);

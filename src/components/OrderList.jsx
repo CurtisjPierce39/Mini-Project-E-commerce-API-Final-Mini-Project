@@ -2,8 +2,7 @@ import { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { func } from "prop-types";
-import { Button, Alert, Container, ListGroup , Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Button, Alert, Container, ListGroup } from "react-bootstrap";
 
 
 class OrderList extends Component {
@@ -54,29 +53,22 @@ class OrderList extends Component {
         const { orders, error } = this.state;
 
         return (
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>Order Date</th>
-                        <th>Customer Name</th>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <Container>
+                {error && <Alert variant='danger'>{error}</Alert>}
+                <h2 className='mt-3 mb-3 text-center'>Orders</h2>
+                <ListGroup>
                     {orders.map(order => (
-                        <tr key={order.id}>
-                            <td>{order.orderDate}</td>
-                            <td>{order.customerName}</td>
-                            <td>{order.productName}</td>
-                            <td>{order.quantity}</td>
-                        </tr>
+                        <ListGroup.Item key={order.id} className='d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 bg-white rounded'>
+                            <Link to={`/edit-order/${order.id}`} className='text-primary'>{order.date}<br></br>{order.customer_id}<br></br>{order.product_id}</Link>
+                            <Button variant='danger' size='sm' onClick={() => this.deleteOrder(order.id)}>Delete</Button>
+                        </ListGroup.Item>
                     ))}
-                </tbody>
-            </Table>
+                </ListGroup>
+            </Container>
         );
     }
 }
+
 OrderList.propTypes = {
     onOrderSelect: func
 }

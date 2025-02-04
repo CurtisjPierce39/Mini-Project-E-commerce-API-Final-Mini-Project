@@ -12,6 +12,7 @@ import HomePage from './components/HomePage';
 import OrderForm from './components/OrderForm';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import CustomerAccountList from './components/CustomerAccount';
 
 function App() {
 
@@ -44,18 +45,18 @@ function App() {
   const handleProductDeleted = () => {
     fetchProducts();
   };
-  const handleEditOrder = (order) => {
-    setSelectedOrder(order)
-  };
+  // const handleEditOrder = (order) => {
+  //   setSelectedOrder(order)
+  // };
   
-  const handleOrderUpdated = () => {
-    fetchOrders();
-    setSelectedOrder(null);
-  };
+  // const handleOrderUpdated = () => {
+  //   fetchOrders();
+  //   setSelectedOrder(null);
+  // };
 
-  const handleOrderDeleted = () => {
-    fetchOrders();
-  };
+  // const handleOrderDeleted = () => {
+  //   fetchOrders();
+  // };
 
   return (
     <div className='app-container'>
@@ -65,6 +66,7 @@ function App() {
         <Route path="/add-customer/" element={<CustomerFormWrapper />} />
         <Route path="/edit-customer/:id" element={<CustomerFormWrapper />} />
         <Route path="/customers" element={<CustomerList />} />
+        <Route path="/customer-account" element={<CustomerAccountList />} />
         <Route path="/orders" element={<OrderList />} />
         <Route path="/add-order" element={<OrderForm />} />
         <Route path="/add-product" element={<ProductForm selectedProduct={selectedProduct} onProductUpdated={handleProductUpdated}/>} />
