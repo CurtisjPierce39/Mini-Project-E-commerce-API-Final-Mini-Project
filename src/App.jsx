@@ -74,6 +74,7 @@ function App() {
         <Route path='/products' element={<ProductList products={products} onEditProduct={handleEditProduct} onProductDeleted={handleProductDeleted}/>} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+      
     </div>
   );
 }

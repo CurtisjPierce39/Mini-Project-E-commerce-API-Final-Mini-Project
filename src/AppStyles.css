@@ -125,3 +125,9 @@ div img {
     max-width: 50%;
     height: auto;
 }
+
+a {
+    font-size: 25px;
+    margin: 15px;
+    padding: 20px;
+}
